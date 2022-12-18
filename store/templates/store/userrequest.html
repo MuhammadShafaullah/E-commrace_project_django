@@ -1,0 +1,32 @@
+{% extends 'store/base.html' %}
+
+{% block title %} Home {% endblock title %}
+
+{% block body %} 
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Contact Number</th>
+            <th scope="col">Postal Address </th>
+            <th scope="col">City </th>
+            <th scope="col">Password </th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for req in reqts %}
+          <tr>
+            <th scope="row">{{req.id}}</th>
+            <td>{{req.name}}</td>
+            <td>{{req.contactnum}}</td>
+            <td>{{req.postadress}}</td>
+            <td>{{req.city}}</td>
+            <td>{{req.password}}</td>
+            <td><button type="button" class="btn btn-primary">Accept</button> <button type="button" class="btn btn-danger">Cancel</button></td>
+          </tr>
+        {% endfor %}  
+      </table>
+
+{% endblock body %}

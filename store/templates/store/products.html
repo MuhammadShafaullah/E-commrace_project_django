@@ -1,0 +1,22 @@
+{% extends 'store/base.html' %}
+{% block title %} Signin {% endblock title %}
+{% block body %} 
+
+
+<div class="container">
+    <h1 align="center">Avaliable Products</h1><br>
+    <!-- Using Messages django -->
+    {% if messages %} {% for message in messages %}
+    <div
+      class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      <strong>{{message}}</strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %} {% endif %}
+
+    
+
+</div>    
+{% endblock body %} 

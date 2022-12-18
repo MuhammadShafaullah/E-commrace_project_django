@@ -1,0 +1,75 @@
+{% extends 'store/base.html' %}
+{% block title %} Home {% endblock title %}
+{% block body %} 
+<br>
+<div class="container">
+   
+
+    <h2 class="text-center alert alert-danger">Soled Products Info</h2>
+       <div class="row">
+          <div class="col-sm-6">
+             <h2 class="text-center alert alert-primary">Soled Items</h2>
+             <table class="table table-hover">
+                <thead>
+                   <tr>
+                      <th scope="col" style="width: 10%;">Image</th>
+                      <th scope="col" >Product Name</th>
+                      <th scope="col" style="width: 40%;">Desc</th>
+                      <th scope="col">Price</th>
+                   </tr>
+                </thead>
+                <tbody>
+                   {% for produ in products %}
+                   <tr>
+                      {% if produ.image %}
+                         <td><img src="{{ produ.image.url }}" alt="" class="img-thumbnail "></td>
+                      {% else %} 
+                         <td>image</td>
+                      {% endif %}   
+                      <td>{{produ.product_name}}</td>
+                      <td>{{produ.desc}}</td>
+                      <td><b>{{produ.price}}</td>
+                      {% endfor %}  
+                   </tr>
+                </tbody>
+             </table><br>
+             <h2>Total Price Rs-/{{tprice}}</h2><br>
+             <a href="{% url 'dashboard'%}" class="btn btn-success">Back</a>
+          </div> 
+             
+             
+          
+             <div class="col-sm-6">
+                <h2 class="text-center alert alert-primary">Buyer Info</h2>
+                <table class="table table-hover">
+                    <thead>
+                       <tr>
+                          <th scope="col">Name</th>
+                          <th scope="col">Number</th>
+                          <th scope="col">Postal Address</th>
+                          <th scope="col">City</th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                       {% for buy in buyers %}
+                       <tr>
+                          
+                            <td>{{buy.name}}</td>
+                            <td>{{buy.cnum}}</td>
+                            <td>{{buy.pstad}}</td>
+                            <td>{{buy.city}}</td>
+                            
+                           
+                       </tr>
+                       {% endfor %} 
+                    </tbody>
+                 </table>
+               
+             </div>   
+            
+       </div>      
+</div>
+
+
+
+{% endblock body %} 

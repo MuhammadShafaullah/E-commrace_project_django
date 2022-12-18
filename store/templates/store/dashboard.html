@@ -1,0 +1,112 @@
+{% extends 'store/base.html' %}
+
+{% block body%}
+{% load static %}<br><br>
+
+<div class="container">
+    <!-- Using Messages django -->
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>{{message}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    
+
+
+<div class="container" >
+    <h1 align="center" class="my-5">Dasheboard</h1>
+    <div>
+    
+    <a href="{% url 'additem' %}" class="btn btn-success"> Add Item</a>
+    <a  href="{% url 'soled' %}" class="btn btn-primary">
+      Orders details <span class="badge badge-light">{{total}}</span>
+    </a><br>
+    
+
+  <br>
+  <div class="row">
+    <div class="col-sm-12">
+      <h4 class="text-center alert alert-primary" align="center">Avalible Products</h4>
+      {% if products %}
+      <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Item ID</th>
+              <th scope="col" style="width: 10%;">Image</th>
+              <th scope="col" >Product Name</th>
+              <th scope="col" style="width: 30%;">Desc</th>
+              <th scope="col">Category</th>
+              <th scope="col">Publish Date</th>
+              <th scope="col" >Price</th>
+              <th scope="col" >Action</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for produ in products %}
+            <tr>
+              <th scope="row">{{produ.id}}</th>
+              {% if produ.image %}
+                <td>
+                  <img src="{{ produ.image.url }}" alt="" class="img-thumbnail ">
+                </td>
+              {% else %} 
+                <td>
+                  image
+                </td>
+              {% endif %}   
+              
+              <td>{{produ.product_name}}</td>
+              <td>{{produ.desc}}</td>
+              <td>{{produ.category}}</td>
+              <td>{{produ.pub_date}}</td>
+              <td>{{produ.price}}</td>
+              <td><a class="btn btn-primary btn-sm" href="{% url 'updateitem' produ.id %}">Edit</a><br>
+
+                  <a class="btn btn-danger btn-sm" href="{% url 'delitem'  produ.id %}" >Delete</a>
+              </td>
+            </tr>
+            {% endfor %}
+          
+          </tbody>
+        
+        </table>
+        {% else %}
+        <h4 class="text-cebter alert alert-info mt-3" align="center">Products Not Avalible </h4>
+      {%endif %}
+      <div>
+       
+       
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            {% if products.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{products.previous_page_number}}">Previous</a></li>
+            {% else %}
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li
+            {% endif %}
+
+            <li class="page-item"><span  class="page-link">Page {{products.number}} of {{ products.paginator.num_pages}}</span></li>
+            
+            {% if products.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{products.next_page_number}}">Next</a></li>
+            {% endif %}
+        </span>
+      </ul>
+    </nav> 
+
+    </div>
+    </div>  
+  </div>    
+</div> 
+
+</div>
+
+{% endblock body %}
